@@ -1,0 +1,43 @@
+Puppet
+--------
+puppet cert list
+puppet agent -t
+puppet cert sign puppetagent
+gedit /etc/puppet/manifests/site.pp
+file{ '/etc/inetd.conf':
+ ensure => '/etc/inet/inetd.conf'
+}
+-------------------------------
+Ansible
+---------
+sudo 
+ansible --version
+gedit /ext/anisble/hosts
+ansible -m ping 'test-servers'
+cd root
+gedit lampstack.yml
+
+name: install apache & php & mysql
+hosts: test-servers
+become: true
+become_user: root
+gather_facts: true
+tasks:
+ - name: "Install apache2"
+   package: name=apache2 state=present
+- name: "Install apache2-php5"
+   package: name=libapache2-mod-php state=present
+- name: "Install php-cli"
+   package: name=php-cli state=present
+- name: "Install php-mcrypt"
+   package: name=php-mcrypt state=present
+- name: "Install php-gd"
+   package: name=php-gd state=present
+- name: "Install php-mysql"
+   package: name=php-mysql state=present
+- name: "Install mysqlserver"
+   package: name=mysql-server state=present
+
+Docker file:
+
+ansible-playbook lampstack.yml
